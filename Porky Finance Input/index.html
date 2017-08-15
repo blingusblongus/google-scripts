@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <style>
+
+        #income-description {
+           width: 20%;
+        }
+        
+        .tab-content {
+            margin: 10px 30px;
+        }
+        
+        #type {
+            font-weight: bold;
+        }
+    </style>
+    <? var d = new Date;
+    var date = d.toISOString().slice(0,10); ?>
+</head>
+
+<body>
+    <!-- Reference: http://getbootstrap.com/javascript/#tabs -->
+    <div role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a role="tab" data-toggle="tab" aria-controls="home" href="#home">Income</a>
+            </li>
+            <li role="presentation"><a role="tab" data-toggle="tab" aria-controls="profile" href="#profile">Expense</a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="home">
+             
+              <form id="income">
+                <div class="form-group">
+
+<div> 
+    <label for="description">Description</label>
+    <input type="text" name="description" id="income-description" placeholder="Description">
+    <br>
+    
+    <label for="date">Date</label>
+    <input type="date" name="date" id="income-date" value="<?= date ?>">
+    <br>
+                    
+    <select name="type" id="type">
+      <option>Guarantee</option>
+      <option>Door</option>
+      <option>% of Till</option>
+    </select>
+    <input type="number" step="0.01" name="amount" id="door" inputmode="numeric">
+    <br>
+    
+    <label for="merch">Merch</label>    
+    <input type="number" step="0.01" name="merch" id="merch">
+    <br>
+    
+    <label for="tips">Tips</label>    
+    <input type="number" step="0.01" name="tips" id="tips">
+    <br>  
+    
+    <!--Checkboxes-->
+    <input type="checkbox" name="nick" id="nick" checked>
+    <label for="nick">Nick</label>
+    <br>
+    
+    <input type="checkbox" name="ilan" id="ilan" checked>
+    <label for="Ilan">Ilan</label>
+    <br>
+    
+    <input type="checkbox" name="matt" id="matt" checked>
+    <label for="matt">Matt</label>
+    <br>
+    
+    <input type="checkbox" name="casey" id="casey" checked>
+    <label for="casey">Casey</label>
+    <br>
+       
+    <input type="checkbox" name="marshall" id="marshall" checked>
+     <label for="marshall">Marshall</label>
+     <br>
+     
+    <input type="checkbox" name="jerry" id="jerry" checked>
+    <label for="jerry">Jerry</label>
+    <br>
+    
+    <input type="checkbox" name="luke" id="luke" checked>
+    <label for="luke">Luke</label>
+    <br>
+    
+    <input type="checkbox" name="eli" id="eli" checked>
+    <label for="eli">Eli</label>
+</div>
+ 
+</div>
+ 
+ <input type="submit" id="#income-submit"  onclick="this.value='Magic ...'; google.script.run.writeIncome(form);">
+              
+              </form>
+
+            </div>
+            
+            <div role="tabpanel" class="tab-pane" id="profile">
+            
+                                     <form id="expense">
+                <div class="form-group">
+ 
+                <div>
+                    <label for="expense-description">Description</label>
+                    <input type="text" name="expenseDescription" class="form-control" id="expense-description" placeholder="Description">
+                </div>
+                <br>
+                <div>
+                
+                 <label for="date">Date</label>
+                  <input type="date" name="date" id="income-date" value="<?= date ?>">
+                  <br>
+    
+                  <label for="category">Category</label>
+                  <select name="category" id="category">
+                      <option>Travel</option>
+                      <option>Merch</option>
+                      <option>Advertising</option>
+                      <option>Food</option>
+                      <option>Misc</option>
+                  </select>
+                  
+                  <br>
+                  
+                  <label for="expense-amount">Amount</label>
+                  <input type="number" step="0.01" name="expenseAmount" id="expense-amount">
+                  
+                  <br>
+                  
+                  <input type="radio" name="paidBy" value="Nick"> Nick<br>
+                  <input type="radio" name="paidBy" value="Ilan"> Ilan<br>
+                  <input type="radio" name="paidBy" value="Matt"> Matt<br>
+                  <input type="radio" name="paidBy" value="Marshall"> Marshall<br>
+                  <input type="radio" name="paidBy" value="Casey"> Casey<br>
+                  <input type="radio" name="paidBy" value="Jerry"> Jerry<br>
+                  <input type="radio" name="paidBy" value="Luke"> Luke<br>
+                  <input type="radio" name="paidBy" value="Eli"> Eli<br>
+                  <input type="radio" name="paidBy" value="Porkus"> Porkus<br>
+                  
+                  <input type="submit" id="#expense-submit"  onclick="this.value='submitted'; google.script.run.writeExpense(form);">
+                  
+                </div>
+                
+                </div>
+                
+             </form>
+             
+             <h2> Budgets </h2>
+             <div class="table-responsive">
+             <? var data = getData(); ?>
+             <table class="table table-bordered">
+               <? for(var i=0; i<data.length; i++) {?>
+               <tr>
+                 <? for(var j=0; j<data[i].length; j++) { ?>
+                   <td><?= data[i][j]; ?></td>
+                  <? } ?>
+               </tr>
+               <? } ?>
+
+             </table>
+             </div>
+            
+            </div>
+
+                
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    
+</body>
+
+</html>
