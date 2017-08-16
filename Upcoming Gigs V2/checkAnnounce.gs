@@ -10,8 +10,8 @@ function checkAnnounce(){
     var lastCol = sheet.getLastColumn();
     
     //get ranges
-    var dateRange = sheet.getRange(dateRow, 2, 1, lastCol - 1);
-    var announcedRange = sheet.getRange(announcedRow, 2, 1, lastCol - 1);
+    var dateRange = sheet.getRange(dateRow, 1, 1, lastCol);
+    var announcedRange = sheet.getRange(announcedRow, 1, 1, lastCol);
     
     //get values
     var dates = dateRange.getValues()[0];
@@ -21,25 +21,33 @@ function checkAnnounce(){
     var obj = {};
     
     //fill properties object
-    for(i=0; i<dates.length - 1; i++){
+    for(i=1; i<dates.length; i++){
         var key = dates[i];
         obj[key] = announced[i];
     }
     
     Logger.log(obj);
     
-    /*
-    
     // Check against Properties
     
     var properties = PropertiesService.getScriptProperties();
     
+    var previous = properties.getProperties();
+    var different = {};
+    
+    for(key in previous){
+        if(previous[key] !== obj[key]){
+            //Can I do this better?
+            different[key] = key;
+        }
+    }
+    
+    Logger.log(different);
+    
     //Set as new properties
     
-    var previous = properties.getProperty("previous");
+    properties.setProperties(obj, true);
     
     //return differences and terminate
-    
-    
-    */  
+
 }
