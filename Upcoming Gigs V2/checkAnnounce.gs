@@ -6,7 +6,7 @@ function checkAnnounce(){
     //NOTE: Won't work for two gigs in same day unless I add another level of checking
     
     //map relevant rows
-    var announcedRow = mapHeaders("Ready to Announce?");
+    var announcedRow = mapHeaders("Confirmed?");
     var dateRow = mapHeaders("Date");
     var lastCol = sheet.getLastColumn();
     
@@ -35,37 +35,21 @@ function checkAnnounce(){
     var properties = PropertiesService.getScriptProperties();
     
     var previous = properties.getProperty('previous');
-    Logger.log(previous);
     var prevObj = JSON.parse(previous);
-    Logger.log(prevObj);
     var different = [];
 
     for(key in prevObj){
         
-        Logger.log(prevObj[key].announced);
-        
-        if(prevObj[key].announced !== obj[key].announced && obj[key].announced === 'Yes'){
-            
-            //Something's weird with this: it's returning null from previous[key].announced, but not when I call the specific key by string name
-            
-            //The properties are being stored as strings, which means I need to reconvert it to object somehow before I can access the data
-            
-            //Gotta figure out JSON.parse () and why it's throwing these exceptions
-            
+        if(prevObj[key].announced !== obj[key].announced && obj[key].announced === 'Yes'){            
             different.push(obj[key].column);
         }
     }
-
-    Logger.log("Different: " + different);
-    
-    //Call email function - nevermind - do this in control
     
     //Set as new properties
     
     var jsonObj = JSON.stringify(obj);
     properties.setProperty('previous', jsonObj);
-    Logger.log('JSON: ' + jsonObj);
     
-    //return differences and terminate
+    //return differences
     return different;
 }
