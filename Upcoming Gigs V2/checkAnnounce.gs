@@ -23,42 +23,49 @@ function checkAnnounce(){
     
     //fill properties object
     for(i=1; i<dates.length; i++){
-        var key = dates[i];
+        var key = i;
         obj[key] = {
             announced: announced[i],
             column: i
         };
     }
     
-    Logger.log(obj);
-    
     // Check against Properties
     
     var properties = PropertiesService.getScriptProperties();
     
-    var previous = properties.getProperties();
+    var previous = properties.getProperty('previous');
+    Logger.log(previous);
+    var prevObj = JSON.parse(previous);
+    Logger.log(prevObj);
     var different = [];
 
-    for(key in obj){
-        if(previous[key].announced !== obj[key].announced){
+    for(key in prevObj){
+        
+        Logger.log(prevObj[key].announced);
+        
+        if(prevObj[key].announced !== obj[key].announced && obj[key].announced === 'Yes'){
             
             //Something's weird with this: it's returning null from previous[key].announced, but not when I call the specific key by string name
-
-            Logger.log(previous.announced);
-            Logger.log(obj[key].announced);
+            
+            //The properties are being stored as strings, which means I need to reconvert it to object somehow before I can access the data
+            
+            //Gotta figure out JSON.parse () and why it's throwing these exceptions
             
             different.push(obj[key].column);
         }
     }
 
-    Logger.log(different);
+    Logger.log("Different: " + different);
     
-    //Call email function
+    //Call email function - nevermind - do this in control
     
     //Set as new properties
     
-    properties.setProperties(obj, true);
+    var jsonObj = JSON.stringify(obj);
+    properties.setProperty('previous', jsonObj);
+    Logger.log('JSON: ' + jsonObj);
     
     //return differences and terminate
-
+    return different;
 }
