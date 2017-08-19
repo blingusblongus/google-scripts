@@ -41,7 +41,7 @@ function checkAnnounce(){
     for(key in prevObj){
         
         if(prevObj[key].announced !== obj[key].announced && obj[key].announced === 'Yes'){            
-            different.push(obj[key].column);
+            different.push(obj[key].column + 1);
         }
     }
     
