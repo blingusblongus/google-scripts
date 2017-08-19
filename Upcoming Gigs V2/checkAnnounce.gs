@@ -6,7 +6,7 @@ function checkAnnounce(){
     //NOTE: Won't work for two gigs in same day unless I add another level of checking
     
     //map relevant rows
-    var announcedRow = mapHeaders("Ready to Announce?");
+    var announcedRow = mapHeaders("Confirmed?");
     var dateRow = mapHeaders("Date");
     var lastCol = sheet.getLastColumn();
     
@@ -23,42 +23,33 @@ function checkAnnounce(){
     
     //fill properties object
     for(i=1; i<dates.length; i++){
-        var key = dates[i];
+        var key = i;
         obj[key] = {
             announced: announced[i],
             column: i
         };
     }
     
-    Logger.log(obj);
-    
     // Check against Properties
     
     var properties = PropertiesService.getScriptProperties();
     
-    var previous = properties.getProperties();
+    var previous = properties.getProperty('previous');
+    var prevObj = JSON.parse(previous);
     var different = [];
 
-    for(key in obj){
-        if(previous[key].announced !== obj[key].announced){
-            
-            //Something's weird with this: it's returning null from previous[key].announced, but not when I call the specific key by string name
-
-            Logger.log(previous.announced);
-            Logger.log(obj[key].announced);
-            
+    for(key in prevObj){
+        
+        if(prevObj[key].announced !== obj[key].announced && obj[key].announced === 'Yes'){            
             different.push(obj[key].column);
         }
     }
-
-    Logger.log(different);
-    
-    //Call email function
     
     //Set as new properties
     
-    properties.setProperties(obj, true);
+    var jsonObj = JSON.stringify(obj);
+    properties.setProperty('previous', jsonObj);
     
-    //return differences and terminate
-
+    //return differences
+    return different;
 }
