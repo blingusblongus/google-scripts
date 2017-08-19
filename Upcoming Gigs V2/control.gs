@@ -19,6 +19,7 @@ function control() {
     
     if(cols.length > 0){
         data.cols = cols;
+        getNewGigData(data);
         sendEmail(data);
     }
     

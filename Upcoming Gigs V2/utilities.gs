@@ -1,3 +1,3 @@
 function splitDate(date){
-    return date.toString().split("00")[0];
+    return date.toString().split(" 00")[0];
 }
