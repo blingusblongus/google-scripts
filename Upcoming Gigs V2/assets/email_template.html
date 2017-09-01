@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    
+    <? var data = getData(); ?>
+    
+    <style>
+      body {
+        margin: 0px;
+        }
+      
+      h1 {
+        text-align: center;
+        }
+        
+      ul {
+        list-style-type: none;
+        text-align: center;
+      }
+      
+      p {
+        text-align: center;
+        }
+        
+      .header {
+        font-weight: bold;
+      }
+      
+      #calendar {
+        margin: 0px auto;
+        display: block;
+        }
+        
+      #head {
+        background-color: #2B6548;
+        margin-top: -22px;
+        margin-bottom: 0px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        }
+        
+      hr {
+        border: 2px dotted black;
+      }
+      
+      #content {
+        background-color: #ADD8E6;
+        margin: -15px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        
+        }
+        
+              
+    </style>
+  </head>
+  <body>
+    
+    <div id="head">
+    
+      <h1>Gig confirmed!</h1>
+        
+      <p id="subtitle">The following gig has just been marked as confirmed:</p>
+
+    </div>
+    
+    <div id="content">
+    
+    <? for(i=0; i<data.length; i++){ ?>
+    
+    <ul>
+      <li><span class="header">Date:</span> <?!= data[i].weekday ?>, <?!= data[i].date ?></li>
+      <li><span class="header">City:</span> <?!= data[i].city ?></li>
+      <li><span class="header">Venue:</span> <?!= data[i].venue ?></li>
+      <li><span class="header">Event:</span> <?!= data[i].event ?></li>
+      <li><span class="header">Doors/Show Time:</span> <?!= data[i].doors ?></li>
+      <li><span class="header">Set Start:</span> <?!= data[i].setStart ?></li>
+      <li><span class="header">Set End:</span> <?!= data[i].setEnd ?></li>
+      <li><span class="header">Payment:</span> <?!= data[i].payment ?></li>
+      <li><span class="header">Equipment/Transportation:</span> <?!= data[i].equipment ?></li>
+      <li><span class="header">Cover:</span> <?!= data[i].cover ?></li>
+    </ul>
+    
+    <div id="break"></div>
+    
+    <? 
+    
+    if(multiple){
+    
+    ?> <hr> <?
+    
+      }
+    
+    } ?>
+    
+   <iframe id="calendar" src="https://calendar.google.com/calendar/embed?mode=AGENDA&amp;height=400&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=8pe9q3ppnot3bfjsuqe060erss%40group.calendar.google.com&amp;color=%2329527A&amp;ctz=America%2FChicago" 
+       style="border:solid 1px #777" 
+       width="500" height="400" 
+       frameborder="0" 
+       scrolling="no"></iframe>
+       
+   <p> <a href="https://calendar.google.com/calendar/embed?src=8pe9q3ppnot3bfjsuqe060erss%40group.calendar.google.com&ctz=America/Chicago"
+       >View Calendarsh in browser</a></p>
+    
+    </div>
+
+  </body>
+</html>
+
+

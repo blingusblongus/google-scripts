@@ -1,3 +1,5 @@
+// CheckAnnounce - works with script properties to check whether things have changed in a specific row to the last sheet
+
 var ss = SpreadsheetApp.getActiveSpreadsheet();
 var sheet = ss.getActiveSheet();
 

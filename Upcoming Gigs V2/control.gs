@@ -1,4 +1,4 @@
-function control() {
+function control(column) {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var sheet = ss.getActiveSheet();
     
@@ -6,22 +6,13 @@ function control() {
         ss: ss,
         sheet: sheet,
         lastRow: sheet.getLastRow(),
-        lastColumn: sheet.getLastColumn(),
+        column: column,
         headers: mapHeaders()
     };
     
-    var cols = checkAnnounce(data);
-    Logger.log(cols);
+    getGigData(data);
     
-    //
-    cols = [2]  //Testing ONLY = SHOULD BE data.cols = cols;
-    //
-    
-    if(cols.length > 0){
-        data.cols = cols;
-        getNewGigData(data);
-        sendEmail(data);
-    }
-    
-    Logger.log(data);
+    Browser.msgBox("Column = " + data.column);
+    Logger.log("Run at " + new Date());
+    Logger.log(data.gig);
 }

@@ -13,6 +13,7 @@ function onEdit(){
     
     if(checkValue === 'Confirmed?' && cellValue === 'Yes')
     {
-        control();
+        var col = cell.getColumn();
+        control(col);
     }
 }

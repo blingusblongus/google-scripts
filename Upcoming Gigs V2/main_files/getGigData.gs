@@ -1,4 +1,4 @@
-function getNewGigData(data){
+function getGigData(data){
     var sheet = data.sheet;
     data.gigs = [];
     
@@ -10,8 +10,9 @@ function getNewGigData(data){
         
         var item = {
             date: splitDate(values[data.headers["Date"] - 1][0]),
-            loadIn: values[data.headers["Load In"][0]],
-            showTime: values[data.headers["Show Time"][0]],
+            loadIn: values[data.headers["Load In"] - 1][0],
+            showTime: values[data.headers["Show Time"] - 1][0],
+            setLength: values[data.headers["Set Length"] - 1[0],
             city: values[data.headers["City"] - 1][0],
             venue: values[data.headers["Venue"] - 1][0]
         }
